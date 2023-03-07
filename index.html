@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d28a6644c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Shopping Categories</title>
+</head>
+
+<body>
+    <header>
+        <div id="divStatus">
+            <p id="pStatus">Status: <span></span></p>
+            <p id="pReadyStatus">OK: <span></span></p>
+            <p id="pError"></p>
+        </div>
+
+        <h1>Shopping</h1>
+        <div id="cesta">             
+            <button id="btnCesta"><span id="spnCantidad">0</span><i class="fa-solid fa-cart-shopping cesta"></i></button>                    
+            
+
+            <div id="divCesta" class="cesta">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th><button id="btnOcultar" class="cesta">Cerrar</button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">Total: 0€</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <button id="btnVaciarCesta" class="cesta" title="Vaciar cesta">Vaciar Cesta
+                    <i id="iVaciarCesta" class="fa-regular fa-trash-can cesta"></i>
+                </button>
+                <button id="btnComprar" class="cesta" title="Comprar">Comprar
+                    <i id="iComprar" class="fa-regular fa-credit-card cesta"></i>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="secCategorias">
+            <h2>Categorias: 0</h2>
+            <div class="divGridContCat"> </div>
+        </section>
+        <section class="secItems">
+            <h2></h2>
+            <div class="divGridContItem"> </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Pablo Pace.</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

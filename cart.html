@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d28a6644c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Cesta</title>
+</head>
+
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <button id="btnSeguir">
+            <i class="fa-regular fa-circle-left"></i>
+        </button>
+    </header>
+
+    <main>
+        <div id="divCestaCart" class="cesta">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">Total: 0€</td>
+                    </tr>
+
+                </tfoot>
+            </table>
+
+            <button id="btnVaciarCesta" class="cesta">Vaciar Cesta
+                <i id="iVaciarCesta" class="fa-regular fa-trash-can cesta"></i>
+            </button>
+            <button id="btnFinalizar" class="cesta">Finalizar Compra
+                <i class="fa-solid fa-money-bill-1-wave cesta"></i>
+            </button>
+        </div>
+        <div id="divCompraFinalizada">
+            <p>Muchas gracias por tu compra! Vuelve pronto!</p>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

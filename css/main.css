@@ -1,0 +1,627 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans';
+    min-width: 300px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: black;
+    color: white;
+}
+
+#divStatus {
+    position: static;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(4, 71, 134);
+    padding: 5px;
+    display: inline-block;
+    font-size: 0.6em;
+    top: 1px;
+    display: none;
+}
+
+#divStatus p:last-child {
+    color: rgb(5, 55, 86);
+}
+
+h1 {
+    padding: 5px;
+    text-align: center;
+    font-size: 1.7em;
+}
+
+
+/* CESTA********************************************* */
+#cesta {
+    padding: 5px;
+    display: grid;
+    justify-content: right;
+}
+
+#spnCantidad {
+    font-size: 0.7em;
+    padding-right: 5px;
+}
+
+#btnCesta {
+    color: white;
+}
+
+#btnCesta:hover {
+    color: yellowgreen;
+}
+
+#cesta>button:first-of-type {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#divCesta {
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    box-shadow: 2px 2px 10px 2px black;
+    position: absolute;
+    right: 10px;
+    font-size: 0.5em;
+    top: 80px;
+    z-index: 1;
+}
+
+#divCestaCart {
+    font-size: 0.6em;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+
+#btnOcultar {
+    border: none;
+    padding: 5px;
+    background-color: rgb(216, 249, 85);
+    box-shadow: 0 0 3px 1px black;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
+/* CESTA TABLA********************************************* */
+table {
+    width: 95%;
+    margin: 5px auto;
+    text-align: center;
+    border-collapse: collapse;
+    align-items: center;
+    color: black;
+}
+
+.producto {
+    text-align: left;
+    text-indent: 5px;
+}
+
+th {
+    border-bottom: 2px solid black;
+}
+
+tr {
+    height: 45px;
+}
+
+tr:not(:only-child) {
+    border-bottom: 1px dotted black;
+}
+
+tfoot {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-top: 2px solid black;
+    color: rgb(6, 106, 139);
+}
+
+tbody {
+    font-size: 0.9em;
+}
+
+tbody button {
+    text-align: center;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 100%;
+    color: rgb(3, 67, 163);
+    box-shadow: 0 0 3px 2px rgb(3, 67, 163);
+    width: 15px;
+    height: 15px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+
+tbody button:hover {
+    background-color: rgb(144, 209, 245);
+}
+
+tbody td:last-child button {
+    background-color: white;
+    color: red;
+    box-shadow: 0 0 3px 2px rgb(252, 1, 1);
+}
+
+tbody td:last-child button:hover {
+    background-color: rgb(255, 199, 199);
+}
+
+.cantidad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 45px;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+tbody img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+/* CESTA BOTONES********************************************* */
+
+#btnFinalizar,
+#btnVaciarCesta,
+#btnComprar {
+    padding: 8px 15px;
+    margin: 10px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    box-shadow: 0 0 3px 2px rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+#btnComprar,
+#btnFinalizar {
+    float: right;
+}
+
+#btnSeguir {
+    background-color: transparent;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 35px;
+    color: white;
+}
+
+#divCompraFinalizada {
+    margin-top: 30px;
+    padding: 50px;
+    text-align: center;
+    font-size: 1.6em;
+    background-color: aquamarine;
+    display: none;
+}
+
+
+/* CARD CATEGORIAS********************************************* */
+.secCategorias {
+    min-width: 322px;
+}
+
+.secCategorias,
+.secItems {
+    margin: 0 auto;
+    padding-bottom: 15px;
+}
+
+.secItems {
+    background-color: rgba(47, 79, 79, 0.527);
+    border-radius: 20px;
+    box-shadow: 0 0 5px 1px black;
+}
+
+#btnLeft,
+#btnRight {
+    border: none;
+    background-color: transparent;
+    font-size: 40px;
+}
+
+#btnLeft i,
+#btnRight i {
+    color: rgb(93, 94, 93);
+    cursor: pointer;
+}
+
+#btnLeft i:hover,
+#btnRight i:hover {
+    color: rgb(5, 88, 84);
+}
+
+.secCategorias h2,
+.secItems h2 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 20px;
+    font-size: 1.2em;
+    padding: 5px;
+    text-indent: 15px;
+    margin: 20px 0;
+    box-shadow: 1px 1px 3px rgb(0, 0, 0);
+}
+
+.secItems h2 {    
+    background-color: rgba(0, 0, 0, 0.288);    
+    text-shadow: 1px 1px 3px rgb(0, 0, 0);
+}
+
+.divGridContCat {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 5px;
+    column-gap: 8px;
+    justify-items: center;
+}
+
+.divCardCat {
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 1px black;
+    position: relative;
+    width: 150px;
+    height: 100px;
+    transition: background-color 100mst;
+}
+
+.divCardCat:hover {
+    box-shadow: 0px 0px 5px 2px rgb(1, 75, 85);
+}
+
+.divCardCat h3 {
+    font-size: 1em;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+    color: white;
+}
+
+.divCardCat div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.catSelected {
+    background-color: rgb(2, 149, 194);
+}
+
+.catSelected div h3 {
+    color: rgb(92, 221, 238);
+}
+
+/* CARD ITEM********************************************* */
+.divGridContItem {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 10px;
+    margin: 0 auto;
+}
+
+.divCardItem {
+    background-color: white;
+    box-shadow: 0px 0px 3px black;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    display: grid;
+    justify-items: center;
+    width: 250px;
+    text-align: center;
+}
+
+.divCardItem:hover {
+    box-shadow: 0 0 10px black;
+    border: 1px solid rgb(255, 255, 255)
+}
+
+.divStars {
+    box-shadow: 0 0 3px black;
+    border-radius: 15px;
+    padding: 5px;
+    height: 30px;
+    width: 150px;
+    text-align: center;
+    margin: 5px;
+}
+
+.divCardItem>img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 3px black;
+}
+
+.divCardItem h3 {
+    color: darkslategray;
+    padding: 5px;
+    font-size: 1.1em;
+    width: 200px;
+}
+
+.divCardCat p {
+    font-size: 1.3em;
+    color: yellow;
+    text-shadow: 1px 1px 3px black;
+    padding: 2px;
+    width: 100px;
+    text-align: center;
+    border: 1px ridge black;
+    border-radius: 5px;
+}
+
+.divCardCat p:hover {
+    text-shadow: 0 0 3px rgb(0, 0, 0);
+    color: rgb(179, 245, 250);
+}
+
+.divCardItem p {
+    margin-top: 5px;
+    padding: 2px;
+    font-style: italic;
+}
+
+.divCardItem p span {
+    color: darkdarkolivegreen;
+    font-weight: bold;
+}
+
+.divCardItem button {
+    margin-top: 10px;
+    width: 120px;
+    background-color: rgb(3, 107, 167);
+    color: rgb(255, 255, 255);
+    height: 25px;
+    border: none;
+    box-shadow: 0 0 3px rgb(125, 126, 126);
+    cursor: pointer;
+}
+
+.divCardItem button:hover {
+    color: rgb(6, 199, 206);
+}
+
+
+
+/* FOOTER ********************************************************* */
+footer {
+    margin-top: 20px;
+    background-color: rgb(0, 0, 0);
+
+}
+
+footer p {
+    color: white;
+    padding: 20px;
+}
+
+.ocultar {
+    display: none;
+}
+
+
+
+/* Responsive ****************************************************/
+
+/* 430 */
+@media screen and (min-width:430px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    #divStatus {
+        font-size: 0.6em;
+    }
+
+    #divCesta {
+        width: 360px;
+        top: 95px;
+        font-size: 0.7em;
+    }
+
+    #btnOcultar {
+        font-size: 0.8em;
+    }
+
+    #divCestaCart {
+        font-size: 0.8em;
+        max-width: 550px;
+    }
+
+    .secCategorias,
+    .secItems {
+        max-width: 550px;
+    }
+
+    .divGridContCat {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .divCardItem h3 {
+        width: 220px;
+    }
+}
+
+/* 640 */
+@media screen and (min-width:640px) {
+    h1 {
+        font-size: 2.8em;
+    }
+
+    .secCategorias h2,
+    .secItems h2 {
+        font-size: 1.5em;
+    }
+
+    #divStatus {
+        font-size: 0.6em;
+    }
+
+    #divCestaCart {
+        font-size: 0.9em;
+        max-width: 700px;
+    }
+
+    #divCesta {
+        width: 440px;
+        top: 105px;
+        font-size: 0.8em;
+    }
+
+    .secCategorias,
+    .secItems {
+        max-width: 700px;
+    }
+
+    .divGridContCat {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .divGridContItem {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* 768 */
+@media screen and (min-width:768px) {
+    h1 {
+        font-size: 3.5em;
+    }
+
+    #divStatus {
+        font-size: 0.7em;
+    }
+
+    #divCesta {
+        width: 500px;
+        right: 15px;
+        top: 115px;
+    }
+
+    #divCestaCart {
+        font-size: 1em;
+        max-width: 850px;
+    }
+
+    .secCategorias,
+    .secItems {
+        max-width: 850px;
+    }
+
+    .divGridContCat {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .divCardCat h3 {
+        font-size: 1.1em;
+    }
+
+}
+
+/* 992 */
+@media screen and (min-width:992px) {
+    h1 {
+        font-size: 4em;
+    }
+
+    #divStatus {
+        font-size: 0.8em;
+    }
+
+    #divCesta {
+        width: 600px;
+        top: 120px;
+        font-size: 0.9em;
+    }
+
+    #divCestaCart,
+    .secCategorias,
+    .secItems {
+        max-width: 1080px;
+    }
+
+    .divGridContCat {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .divGridContItem {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    h1 {
+        font-size: 5em;
+    }
+
+    #divStatus {
+        font-size: 0.9em;
+    }
+
+    #divCesta {
+        width: 650px;
+        top: 145px;
+    }
+
+    #divCestaCart,
+    .secCategorias,
+    .secItems {
+        max-width: 1250px;
+    }
+
+    .divGridContCat {
+        grid-template-columns: repeat(8, 1fr);
+        column-gap: 10px;
+    }
+
+    #btnLeft,
+    #btnRight {
+        font-size: 40px;
+    }
+
+    .divCardCat {
+        width: 180px;
+        height: 120px;
+    }
+
+    .divCardCat h3 {
+        font-size: 1.2em;
+    }
+
+    .divGridContItem {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
