@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //EVENTOS ********************************************************************************
     window.addEventListener('resize', () => {
-        console.log('resize')
-        if (arrayCategorias) paintCategories()
+
+        if (arrayCategorias.length > 0) paintCategories()
     });
 
 
@@ -604,69 +604,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tbody.innerHTML = '';
         tbody.append(fragment);
+
     };
 
 
     //Buscar la información a traves del fetch ======>>>>>>>>>>>>
     //Busca por ID un elemento
     const getID = async (id) => {
+
         objID.id = id;
+
         const { ok, response } = await fetchData(objID);
 
-        if (ok) addToCart(response);
-        else msg(`Error fetchID: ${response}`);
-    }
+        if (ok)
+            addToCart(response);
+
+        else
+            msg(`Error fetchID: ${response}`);
+
+    };
+
 
     //Busca los items de una categoria
     const getItems = async (category) => {
+
         setLocal(category);
+
         secItems.classList.remove('ocultar');
+
         h2SecItems.textContent = category.toUpperCase();
         h2SecItems.id = category + '!';
 
         objCategory.categoria = category;
         const { ok, response } = await fetchData(objCategory);
 
-        if (ok) paintItems(response.products);
-        else msg(`Error fetchItems: ${response}`);
-    }
+        if (ok)
+            paintItems(response.products);
+
+        else
+            msg(`Error fetchItems: ${response}`);
+
+    };
+
 
     //Busca las categorias
     const getCategories = async () => {
+
         divCesta.classList.toggle('ocultar');
+
         const { ok, response } = await fetchData(objCategories);
 
         if (ok) {
+
             arrayCategorias = arrayCategorias.concat(response);
+
             h2SecCat.textContent = `Categorías: ${arrayCategorias.length}`;
             paintCategories();
-        }
-        else msg(`Error fetchCategorias: ${response}`);
-    }
 
+        } else
+            msg(`Error fetchCategorias: ${response}`);
 
-
+    };
 
 
     //Función inicializadora
     const init = () => {
+
         const url = location.toString();
         console.log('url', url)
+
         if (url.includes('cart')) {
             console.log('cart')
             paintCart();
+
         } else if (url.includes('index') || url.includes('Shopping')) {
             console.log('index')
             secItems.classList.add('ocultar');
+
             paintCart();
             getCategories();
             const ultCategoria = getLocal('cat');
-            if (ultCategoria) getItems(ultCategoria);
-        } else {
-            console.log('url 2', url)
+
+            if (ultCategoria)
+                getItems(ultCategoria);
+
         }
-        console.log('fuera')
-    }
+    };
+
 
     init();
 
