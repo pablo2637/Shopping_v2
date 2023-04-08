@@ -33,11 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const arrayCesta = JSON.parse(localStorage.getItem("arrayCesta")) || [];
 
-    let arrayCategorias;
+    let arrayCategorias = [];
 
 
     //EVENTOS ********************************************************************************
-    window.addEventListener('resize', () => paintCategories());
+    window.addEventListener('resize', () => {
+        console.log('resize')
+        if (arrayCategorias) paintCategories()
+    });
 
 
     body.addEventListener('click', ({ target }) => {
@@ -401,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Creación de Cards
     const createItemCard = item => {
+
         const divCardItem = document.createElement('DIV');
         divCardItem.classList.add('divCardItem');
         divCardItem.id = item.id;
@@ -427,25 +431,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         divCardItem.append(imgItem, h3Item, pItem, divStars, btnItem);
         return divCardItem;
-    }
+
+    };
+
 
     //Pinta las estrellas
     const setStars = rating => {
+
         const fragment = document.createDocumentFragment();
+
         let nro = 5 - Math.round(rating);
 
         for (let i = 1; i <= 5; i++) {
+
             const imgStar = document.createElement('IMG');
-            if (i <= 5 - nro) imgStar.src = 'assets/star1.png';
-            else imgStar.src = 'assets/star2.png';
+
+            if (i <= 5 - nro)
+                imgStar.src = 'assets/star1.png';
+            else
+                imgStar.src = 'assets/star2.png';
+
             imgStar.setAttribute('width', 15 + i);
             fragment.append(imgStar);
-        }
+        };
+
         return fragment;
-    }
+    };
 
 
     const createCategoyCard = (category, index) => {
+
         const divCardCat = document.createElement('DIV');
         divCardCat.classList.add('divCardCat', 'categoria');
         divCardCat.id = category;
@@ -462,39 +477,45 @@ document.addEventListener('DOMContentLoaded', () => {
         divCardCat.append(divH3);
 
         return divCardCat;
-    }
+
+    };
 
 
     //Pinta en el DOM
     const paintItems = items => {
+
         const fragment = document.createDocumentFragment();
 
         items.forEach(item => fragment.append(createItemCard(item)));
+
         divGridContItem.innerHTML = '';
         divGridContItem.append(fragment);
-    }
+
+    };
 
 
     const paintCategories = (primNro, ultNro) => {
+
         const fragment = document.createDocumentFragment();
+
         const tope = arrayCategorias.length - 1;
+
         const { desde, hasta, extraRight, extraLeft } = getFromTo(primNro, ultNro);
 
-        if (extraLeft > 0) {
+        if (extraLeft > 0)
             for (let i = tope; i >= extraLeft; i--) {
                 fragment.prepend(createCategoyCard(arrayCategorias[i], i - (tope + 1)));
-            }
-        }
+            };
 
         for (let i = desde; i <= hasta; i++) {
             fragment.append(createCategoyCard(arrayCategorias[i], i));
-        }
+        };
 
-        if (extraRight > 0) {
+        if (extraRight > 0)
             for (let i = 0; i < extraRight; i++) {
                 fragment.append(createCategoyCard(arrayCategorias[i], i + tope + 1));
-            }
-        }
+            };
+
 
         const btnLeft = document.createElement('BUTTON');
         btnLeft.innerHTML = '<i class="fa-solid fa-circle-arrow-left categoria"></i>'
@@ -510,19 +531,28 @@ document.addEventListener('DOMContentLoaded', () => {
         divGridContCat.append(fragment);
 
         const ultCategoria = getLocal('cat');
+
         if (ultCategoria != '') {
+
             const divSelected = document.querySelector('#' + ultCategoria);
-            if (divSelected) divSelected.classList.toggle('catSelected');
+
+            if (divSelected)
+                divSelected.classList.toggle('catSelected');
+
         }
-    }
+    };
+
 
     const paintCart = () => {
+
         const fragment = document.createDocumentFragment();
         const newArray = getLocal();
+
         let total = 0;
         let totalItems = 0;
 
         newArray.forEach(item => {
+
             const trItem = document.createElement('TR');
             trItem.id = 'tr' + item.id;
 
@@ -535,7 +565,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const tdPrecio = document.createElement('TD');
             tdPrecio.textContent = item.price + '€';
-
 
             const tdCant = document.createElement('TD');
             tdCant.innerHTML += `<button class='remove cesta'>-</button>${item.cantidad}<button class='add cesta'>+</button>`;
@@ -552,23 +581,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             trItem.append(tdImg, tdDesc, tdPrecio, tdCant, tdTotal, tdVaciar);
             fragment.append(trItem);
-        })
+
+        });
+
         //Si no hay nada en el carrito
         if (newArray.length == 0) {
+
             const trCestaVacia = document.createElement('TR');
+
             const tdCestaVacia = document.createElement('TD');
             tdCestaVacia.textContent = 'No hay productos en la cesta.';
             tdCestaVacia.setAttribute('colspan', '6');
 
             trCestaVacia.append(tdCestaVacia)
             fragment.append(trCestaVacia);
-        }
-        if (spnCantidad) spnCantidad.textContent = totalItems;
+        };
+
+        if (spnCantidad)
+            spnCantidad.textContent = totalItems;
+
         tdFootPrecio.textContent = `Total: ${total}€`
 
         tbody.innerHTML = '';
         tbody.append(fragment);
-    }
+    };
 
 
     //Buscar la información a traves del fetch ======>>>>>>>>>>>>
@@ -601,12 +637,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const { ok, response } = await fetchData(objCategories);
 
         if (ok) {
-            arrayCategorias = [].concat(response);
+            arrayCategorias = arrayCategorias.concat(response);
             h2SecCat.textContent = `Categorías: ${arrayCategorias.length}`;
             paintCategories();
         }
         else msg(`Error fetchCategorias: ${response}`);
     }
+
+
+
 
 
     //Función inicializadora
@@ -623,10 +662,12 @@ document.addEventListener('DOMContentLoaded', () => {
             getCategories();
             const ultCategoria = getLocal('cat');
             if (ultCategoria) getItems(ultCategoria);
+        } else {
+            console.log('url 2', url)
         }
         console.log('fuera')
     }
 
     init();
 
-}) //Load
+}); //Load
