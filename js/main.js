@@ -503,15 +503,19 @@ document.addEventListener('DOMContentLoaded', () => {
     //Función inicializadora
     const init = () => {
         const url = location.toString();
-
-        if (url.includes('cart')) paintCart();
-        else if (url.includes('index')) {
+        console.log('url', url)
+        if (url.includes('cart')) {
+            paintCart();
+            console.log('cart')
+        } else if (url.includes('index')) {
+            console.log('index')
             secItems.classList.add('ocultar');
             paintCart();
             getCategories();
             const ultCategoria = getLocal('cat');
             if (ultCategoria) getItems(ultCategoria);
         }
+        console.log('fuera')
     }
 
     init();
