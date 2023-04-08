@@ -16,12 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const divCompraFinalizada = document.querySelector('#divCompraFinalizada');
     const spnCantidad = document.querySelector('#spnCantidad');
 
+
     const objCategories = { url: 'https://dummyjson.com/products/categories', tipo: 'categories' };
+
     const objID = {
         url: 'https://dummyjson.com/products/',
         tipo: 'id',
         id: 0
     };
+
     const objCategory = {
         url: 'https://dummyjson.com/products/category/',
         tipo: 'category',
@@ -29,110 +32,165 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const arrayCesta = JSON.parse(localStorage.getItem("arrayCesta")) || [];
+
     let arrayCategorias;
 
 
     //EVENTOS ********************************************************************************
     window.addEventListener('resize', () => paintCategories());
 
+
     body.addEventListener('click', ({ target }) => {
         //Cart.html
-        if (target.matches('i') && target.parentNode.id == 'btnSeguir') location.assign('index.html');
+        if (target.matches('i') && target.parentNode.id == 'btnSeguir')
+            location.assign('index.html');
+
         else if (target.id == 'btnFinalizar') {
+
             if (tdFootPrecio.textContent != 'Total: 0€') {
+
                 target.disabled = true;
                 finishBuy()
                 setTimeout(() => { location.assign('index.html') }, 5000);
+
             }
         }
 
         //Carrito
         if (target.classList.contains("cesta")) {
-            if (target.matches('i') && target.parentNode.id == 'btnCesta') divCesta.classList.toggle('ocultar');
 
-            if (target.classList.contains('add')) cartItemAddOne(target.parentNode.parentNode.id);
-            else if (target.classList.contains('remove')) cartItemSubOne(target.parentNode.parentNode.id);
-            else if (target.classList.contains('empty')) removeCartItem(target.parentNode.parentNode.id);
-            else if (target.id == 'btnVaciarCesta' || target.parentNode.id == 'btnVaciarCesta') emptyCart();
-            else if (target.id == 'btnComprar' || target.parentNode.id == 'btnComprar') location.assign('cart.html');
-            else if (target.id == 'btnOcultar') divCesta.classList.toggle('ocultar');
+            if (target.matches('i') && target.parentNode.id == 'btnCesta')
+                divCesta.classList.toggle('ocultar');
+
+
+            if (target.classList.contains('add'))
+                cartItemAddOne(target.parentNode.parentNode.id);
+
+            else if (target.classList.contains('remove'))
+                cartItemSubOne(target.parentNode.parentNode.id);
+
+            else if (target.classList.contains('empty'))
+                removeCartItem(target.parentNode.parentNode.id);
+
+            else if (target.id == 'btnVaciarCesta' || target.parentNode.id == 'btnVaciarCesta')
+                emptyCart();
+
+            else if (target.id == 'btnComprar' || target.parentNode.id == 'btnComprar')
+                location.assign('cart.html');
+
+            else if (target.id == 'btnOcultar')
+                divCesta.classList.toggle('ocultar');
+
         }
 
         //Card Items
         if (target.classList.contains('item')) {
-            if (target.matches('button')) getID(target.parentNode.id);
+
+            if (target.matches('button'))
+                getID(target.parentNode.id);
+
         }
 
         //Card Categoria
         if (target.classList.contains('categoria')) {
 
             if (target.matches('i') && target.parentNode.id == 'btnRight') {
+
                 const ultNro = document.querySelector('[nro]:last-of-type');
                 paintCategories(null, ultNro.getAttribute('nro'));
 
             } else if (target.matches('i') && target.parentNode.id == 'btnLeft') {
+
                 const primNro = document.querySelector('[nro]:first-of-type');
                 paintCategories(primNro.getAttribute('nro'));
 
             } else if (target.matches('h3')) {
+
                 removeSelectedClass(target.parentNode.parentNode);
                 getItems(target.parentNode.parentNode.id);
 
             } else if (target.matches('div')) {
+
                 removeSelectedClass(target);
                 getItems(target.id);
             }
         }
-    })
+    });
 
 
     //FUNCIONES ***************************************************************************
 
     // Secundarias
     const removeSelectedClass = async (target) => {
+
         const divSelected = document.querySelector('.catSelected');
-        if (divSelected) await removeClass(divSelected);
 
-        if (target) target.classList.toggle('catSelected');
-    }
+        if (divSelected)
+            await removeClass(divSelected);
 
-    const removeClass = async (divSelected) => {
-        divSelected.classList.toggle('catSelected');
-    }
+        if (target)
+            target.classList.toggle('catSelected');
+    };
+
+
+    const removeClass = async (divSelected) => divSelected.classList.toggle('catSelected')
+
 
     const showStatusChange = data => {
+
         pStatus.textContent = data.status + ' ' + data.statusText;
         pReadyStatus.innerText = data.ok
+
         msg(`URL: ${data.url}`);
-    }
+
+    };
+
 
     const msg = mensaje => pError.textContent = mensaje;
 
+
     const firstLetterUC = string => {
+
         let letra = string.charAt(0);
         return string.replace(letra, letra.toUpperCase());
-    }
+
+    };
+
 
     const finishBuy = () => {
+
         localStorage.removeItem('catSelected');
         emptyCart();
+
         divCompraFinalizada.style = 'display: inherit';
-    }
+
+    };
+
 
     //Dependiendo el tamaño de la pantalla devuelva la cantiadad de botones a pintar.
     const getButtons = () => {
+
         let sw = window.innerWidth;
 
-        if (sw < 430) return 1;
-        if (sw >= 430 && sw < 640) return 2;
-        if (sw >= 640 && sw < 768) return 3;
-        if (sw >= 768 && sw < 992) return 4;
-        if (sw >= 992 && sw < 1200) return 5;
-        if (sw >= 1200) return 6;
-    }
+        if (sw < 430)
+            return 1;
+        if (sw >= 430 && sw < 640)
+            return 2;
+        if (sw >= 640 && sw < 768)
+            return 3;
+        if (sw >= 768 && sw < 992)
+            return 4;
+        if (sw >= 992 && sw < 1200)
+            return 5;
+        if (sw >= 1200)
+            return 6;
+
+    };
+
 
     //Devuelve desde y hasta qué categoría pintar.
     const getFromTo = (primNro, ultNro) => {
+
         let desde, hasta;
         let extraRight = 0;
         let extraLeft = 0;
@@ -142,54 +200,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cantBtnCat--;
         if (!primNro && !ultNro) {
+
             desde = 0;
             hasta = cantBtnCat;
+
         } else if (!primNro && ultNro) {
+
             ultNro = parseInt(ultNro);
             ultNro++;
             desde = ultNro - cantBtnCat;
             hasta = ultNro;
+
         } else if (primNro && !ultNro) {
+
             primNro = parseInt(primNro);
             primNro--;
             desde = primNro;
             hasta = primNro + cantBtnCat;
+
         }
 
         if (hasta > tope) {
+
             extraRight = hasta - tope;
             hasta = tope;
+
             if (desde >= hasta) {
+
                 desde = 0;
                 hasta = cantBtnCat;
                 extraRight = 0;
             }
+
         } else if (desde < 0) {
+
             extraLeft = (tope + 1) + desde;
             desde = 0;
+
             if (hasta < 0) {
                 extraLeft = 0;
                 desde = tope - cantBtnCat;
                 hasta = tope;
             }
+
         }
 
         return { desde, hasta, extraLeft, extraRight };
-    }
+    };
 
 
     // Local Storage
     const getLocal = category => {
-        if (category) {
+
+        if (category)
             return localStorage.getItem('catSelected') || '';
-        } else {
+
+        else
             return JSON.parse(localStorage.getItem("arrayCesta")) || [];
-        }
-    }
+
+    };
+
 
     const setLocal = category => {
-        if (category) localStorage.setItem('catSelected', category);
-        else localStorage.setItem("arrayCesta", JSON.stringify(arrayCesta));
+
+        if (category)
+            localStorage.setItem('catSelected', category);
+
+        else
+            localStorage.setItem("arrayCesta", JSON.stringify(arrayCesta));
+
     };
 
 
@@ -197,19 +276,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Fetch
     const fetchData = async (data) => {
+
         try {
             let url;
+
             switch (data.tipo) {
                 case 'categories':
                     url = data.url;
                     break;
+
                 case 'category':
                     url = data.url + data.categoria;
                     break;
+
                 case 'id':
                     url = data.url + data.id;
                     break;
-            }
+
+            };
 
             const peticion = await fetch(url);
             showStatusChange(peticion)
@@ -507,7 +591,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (url.includes('cart')) {
             paintCart();
             console.log('cart')
-        } else if (url.includes('index')) {
+        } else {
+        // } else if (url.includes('index')) {
             console.log('index')
             secItems.classList.add('ocultar');
             paintCart();
