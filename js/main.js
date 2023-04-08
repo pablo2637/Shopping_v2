@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const spnCantidad = document.querySelector('#spnCantidad');
 
 
-    const objCategories = { url: 'https://dummyjson.com/products/categories', tipo: 'categories' };
+    const objCategories = {
+        url: 'https://dummyjson.com/products/categories',
+        tipo: 'categories'
+    };
 
     const objID = {
         url: 'https://dummyjson.com/products/',
@@ -39,11 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //EVENTOS ********************************************************************************
     window.addEventListener('resize', () => {
 
-        if (arrayCategorias.length > 0) paintCategories()
+        if (arrayCategorias.length > 0)
+            paintCategories();
+
     });
 
 
     body.addEventListener('click', ({ target }) => {
+        
         //Cart.html
         if (target.matches('i') && target.parentNode.id == 'btnSeguir')
             location.assign('index.html');
@@ -671,18 +677,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const init = () => {
 
         const url = location.toString();
-        console.log('url', url)
 
         if (url.includes('cart')) {
-            console.log('cart')
+
             paintCart();
 
         } else if (url.includes('index') || url.includes('Shopping')) {
-            console.log('index')
+
             secItems.classList.add('ocultar');
 
             paintCart();
             getCategories();
+
             const ultCategoria = getLocal('cat');
 
             if (ultCategoria)
