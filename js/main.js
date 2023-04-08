@@ -299,20 +299,26 @@ document.addEventListener('DOMContentLoaded', () => {
             showStatusChange(peticion)
 
             if (peticion.ok) {
+
                 const resp = await peticion.json();
                 return {
                     ok: true,
                     response: resp,
                 };
+
             } else {
+
                 throw {
                     ok: false,
-                    response: `Error: status ${peticion.status}`,
+                    response: `Error: status ${peticion.status}`
+
                 };
             }
+
         } catch (error) {
             return error;
-        }
+
+        };
     };
 
 
@@ -320,25 +326,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Vacia el carrito completo
     const emptyCart = () => {
+
         arrayCesta.splice(0);
         tdFootPrecio.textContent = 'Total: 0€';
 
         setLocal();
         paintCart();
-    }
+
+    };
+
 
     //Quita un item del carrito
     const removeCartItem = id => {
-        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''))
+
+        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''));
+
         arrayCesta.splice(indItem, 1);
 
         setLocal();
         paintCart();
-    }
+
+    };
+
 
     //Resta 1 unidad del item
     const cartItemSubOne = id => {
-        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''))
+
+        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''));
 
         arrayCesta[indItem].cantidad -= 1;
         arrayCesta[indItem].subTotal = arrayCesta[indItem].cantidad * arrayCesta[indItem].price;
@@ -347,31 +361,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setLocal();
         paintCart();
-    }
+
+    };
+
 
     //Suma 1 unidad del item
     const cartItemAddOne = id => {
-        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''))
+
+        const indItem = arrayCesta.findIndex(item => item.id == id.replace('tr', ''));
+
         arrayCesta[indItem].cantidad += 1;
         arrayCesta[indItem].subTotal = arrayCesta[indItem].cantidad * arrayCesta[indItem].price;
 
         setLocal();
         paintCart();
-    }
+
+    };
+
 
     //Agregar el item al carrito
     const addToCart = async ({ id, title, price, thumbnail }) => {
+
         const objItem = arrayCesta.find(item => item.id == id);
 
         if (objItem) {
+
             const indItem = arrayCesta.findIndex(item => item.id == id)
             arrayCesta[indItem].cantidad += 1;
             arrayCesta[indItem].subTotal = arrayCesta[indItem].cantidad * arrayCesta[indItem].price;
-        } else arrayCesta.push({ id, title, price, thumbnail, cantidad: 1, subTotal: price });
+
+        } else
+            arrayCesta.push({ id, title, price, thumbnail, cantidad: 1, subTotal: price });
 
         setLocal();
         paintCart();
-    }
+
+    };
 
 
     //Creación de Cards
@@ -589,10 +614,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = location.toString();
         console.log('url', url)
         if (url.includes('cart')) {
-            paintCart();
             console.log('cart')
-        } else {
-        // } else if (url.includes('index')) {
+            paintCart();
+        } else if (url.includes('index') || url.includes('Shopping')) {
             console.log('index')
             secItems.classList.add('ocultar');
             paintCart();
